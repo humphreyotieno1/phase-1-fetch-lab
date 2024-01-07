@@ -1,6 +1,24 @@
 function fetchBooks() {
-  // To pass the tests, don't forget to return your fetch!
-  
+ // Use the fetch function to make a request to the API
+ return fetch('https://anapioficeandfire.com/api/books')
+ .then(response => {
+   // Check if the response is successful (status code 200)
+   if (!response.ok) {
+     throw new Error(`Network response was not ok, status code: ${response.status}`);
+   }
+   // Convert the response to JSON
+   return response.json();
+ })
+ .then(data => {
+   // Call renderBooks with the JSON data
+   renderBooks(data);
+   // Return the fetch for testing purposes
+   return data;
+ })
+ .catch(error => {
+   // Handle errors during the fetch
+   console.error('Error during fetch:', error);
+ });
 }
 
 function renderBooks(books) {
